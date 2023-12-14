@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body onload="mostrarpelicula()">
+    <div id="visual">
+
+    </div>
+</body>
+</html>
+<script>
+     function mostrarpelicula(){
+       
+        return new Promise(response => {
+            let urlpeli = localStorage.urlpeli
+            console.log(urlpeli);
+            fetch(urlpeli)
+                .then((response) => response.json())
+                .then((data) => {
+                    document.getElementById("visual").innerHTML= `<div class="card" style="width: 18rem;">
+  <img src="${data.Poster}" class="card-img-top" alt="...">
+  <div class="card-body">
+    <p class="card-text">${data.Title}</p>
+     <p class="card-text">${data.Director}</p>
+      <p class="card-text">${data.Year}</p>
+       <p class="card-text">${data.Plot}</p>
+  </div>
+</div>`
+                })
+            })
+        
+        }
+</script>

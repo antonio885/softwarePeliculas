@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/pelicula.css">
+</head>
+
+<body>
+    <div class="inicio">
+        <div>
+            <h1>peliculas</h1>
+        </div>
+        <div class="content">
+            <input type="text" id="nombrePelicu" style="width: 300px;">
+            <img src="img/download-removebg-preview.png" width="40px" alt="">
+        </div>
+        <div>
+            <button class="mt-3" id="btnbuscar" onclick="mostrarpelicula()">buscar pelicula</button>
+
+        </div>
+        <div id="entrete">
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    // const pelicula = []
+
+
+    let nombrePelicula = document.getElementById("nombrePelicu")
+
+    function mostrarpelicula() {
+
+        let nombrePeli = nombrePelicula.value
+        let url = `http://www.omdbapi.com/?t=${nombrePeli}&apikey=adcc98f`
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const datos = data
+                console.log(data)
+
+                document.getElementById("entrete").innerHTML = `<div class="card" style="width: 18rem;">
+                    <a onclick="enviar('${datos}')" href="mostrar.html">
+                    <img src="${data.Poster}" class="card-img-top" alt="..."></a>
+
+  <div class="card-body">
+    <p class="card-text">${data.Title}</p>
+    
+  </div>
+</div>`
+
+                // data.results.forEach(element => {
+                // pelicula.push(element)    
+
+
+            });
+
+    }
+
+    function enviar(urlpeli) {
+        console.log(urlpeli.Title);
+        alert("texto");
+        localStorage.urlpeli(urlpeli)
+    }
+//     function mostrarpeliculas(){
+//         llamarpelicula().then(Response =>{
+//             let esquema     
+
+//             pelicula.forEach((element)=>{
+//                 esquema += `<div class="card" style="width: 18rem;">
+//   <img src="..." class="card-img-top" alt="...">
+//   <div class="card-body">
+//     <p class="card-text">${element.Search[0].Title}</p>
+//   </div>
+// </div>`
+//             })
+//             document.getElementById("entrete").innerHTML = esquema
+//         })
+//     }
+//  function detallepelicula(){
+
+//  }
+</script>
